@@ -19,8 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         if let unwrappedWindow = window{
-            let vc = ViewController()
-            vc.view.backgroundColor = UIColor.redColor()
+            let vc = WorkspaceViewController()
+            
+            unwrappedWindow.backgroundColor = UIColor.whiteColor()
             unwrappedWindow.rootViewController = vc
             unwrappedWindow.makeKeyAndVisible()
         }

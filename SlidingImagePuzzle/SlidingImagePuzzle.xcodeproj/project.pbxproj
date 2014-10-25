@@ -7,11 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F11B7DA19FC2DE100058274 /* cameraRollCollection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F11B7D919FC2DE100058274 /* cameraRollCollection@2x.png */; };
+		0F11B7DC19FC2E0400058274 /* cameraRollCollection@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F11B7DB19FC2E0400058274 /* cameraRollCollection@3x.png */; };
 		0F62451F19F60AD80032D5F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F62451E19F60AD80032D5F6 /* AppDelegate.swift */; };
-		0F62452119F60AD80032D5F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F62452019F60AD80032D5F6 /* ViewController.swift */; };
 		0F62452619F60AD80032D5F6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F62452519F60AD80032D5F6 /* Images.xcassets */; };
 		0F62452919F60AD80032D5F6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F62452719F60AD80032D5F6 /* LaunchScreen.xib */; };
 		0F62453519F60AD80032D5F6 /* SlidingImagePuzzleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F62453419F60AD80032D5F6 /* SlidingImagePuzzleTests.swift */; };
+		0F62453F19F60D180032D5F6 /* WorkspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F62453E19F60D180032D5F6 /* WorkspaceViewController.swift */; };
+		0F62454219F60D740032D5F6 /* WorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F62454119F60D740032D5F6 /* WorkspaceView.swift */; };
+		0F88B47919F6106A002DAA38 /* SelectPuzzleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F88B47819F6106A002DAA38 /* SelectPuzzleImageViewController.swift */; };
+		0F88B47B19F61126002DAA38 /* SelectPuzzleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F88B47A19F61126002DAA38 /* SelectPuzzleImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,15 +30,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F11B7D919FC2DE100058274 /* cameraRollCollection@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameraRollCollection@2x.png"; sourceTree = "<group>"; };
+		0F11B7DB19FC2E0400058274 /* cameraRollCollection@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameraRollCollection@3x.png"; sourceTree = "<group>"; };
 		0F62451919F60AD80032D5F6 /* SlidingImagePuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlidingImagePuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F62451D19F60AD80032D5F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F62451E19F60AD80032D5F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0F62452019F60AD80032D5F6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0F62452519F60AD80032D5F6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0F62452819F60AD80032D5F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0F62452E19F60AD80032D5F6 /* SlidingImagePuzzleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlidingImagePuzzleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F62453319F60AD80032D5F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F62453419F60AD80032D5F6 /* SlidingImagePuzzleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidingImagePuzzleTests.swift; sourceTree = "<group>"; };
+		0F62453E19F60D180032D5F6 /* WorkspaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceViewController.swift; sourceTree = "<group>"; };
+		0F62454119F60D740032D5F6 /* WorkspaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceView.swift; sourceTree = "<group>"; };
+		0F88B47819F6106A002DAA38 /* SelectPuzzleImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPuzzleImageViewController.swift; sourceTree = "<group>"; };
+		0F88B47A19F61126002DAA38 /* SelectPuzzleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPuzzleImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +64,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F11B7D819FC2DC700058274 /* Image Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0F11B7D919FC2DE100058274 /* cameraRollCollection@2x.png */,
+				0F11B7DB19FC2E0400058274 /* cameraRollCollection@3x.png */,
+			);
+			name = "Image Resources";
+			sourceTree = "<group>";
+		};
 		0F62451019F60AD80032D5F6 = {
 			isa = PBXGroup;
 			children = (
@@ -75,8 +94,9 @@
 		0F62451B19F60AD80032D5F6 /* SlidingImagePuzzle */ = {
 			isa = PBXGroup;
 			children = (
+				0F88B47719F61053002DAA38 /* Puzzle Selection */,
+				0F62454019F60D5A0032D5F6 /* Workspace */,
 				0F62451E19F60AD80032D5F6 /* AppDelegate.swift */,
-				0F62452019F60AD80032D5F6 /* ViewController.swift */,
 				0F62452519F60AD80032D5F6 /* Images.xcassets */,
 				0F62452719F60AD80032D5F6 /* LaunchScreen.xib */,
 				0F62451C19F60AD80032D5F6 /* Supporting Files */,
@@ -87,6 +107,7 @@
 		0F62451C19F60AD80032D5F6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0F11B7D819FC2DC700058274 /* Image Resources */,
 				0F62451D19F60AD80032D5F6 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -107,6 +128,24 @@
 				0F62453319F60AD80032D5F6 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0F62454019F60D5A0032D5F6 /* Workspace */ = {
+			isa = PBXGroup;
+			children = (
+				0F62453E19F60D180032D5F6 /* WorkspaceViewController.swift */,
+				0F62454119F60D740032D5F6 /* WorkspaceView.swift */,
+			);
+			name = Workspace;
+			sourceTree = "<group>";
+		};
+		0F88B47719F61053002DAA38 /* Puzzle Selection */ = {
+			isa = PBXGroup;
+			children = (
+				0F88B47819F6106A002DAA38 /* SelectPuzzleImageViewController.swift */,
+				0F88B47A19F61126002DAA38 /* SelectPuzzleImageView.swift */,
+			);
+			name = "Puzzle Selection";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,6 +197,7 @@
 				TargetAttributes = {
 					0F62451819F60AD80032D5F6 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = 58HP4T3ZJ9;
 					};
 					0F62452D19F60AD80032D5F6 = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -190,7 +230,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F62452919F60AD80032D5F6 /* LaunchScreen.xib in Resources */,
+				0F11B7DC19FC2E0400058274 /* cameraRollCollection@3x.png in Resources */,
 				0F62452619F60AD80032D5F6 /* Images.xcassets in Resources */,
+				0F11B7DA19FC2DE100058274 /* cameraRollCollection@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,8 +250,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F62452119F60AD80032D5F6 /* ViewController.swift in Sources */,
+				0F62454219F60D740032D5F6 /* WorkspaceView.swift in Sources */,
+				0F88B47919F6106A002DAA38 /* SelectPuzzleImageViewController.swift in Sources */,
+				0F62453F19F60D180032D5F6 /* WorkspaceViewController.swift in Sources */,
 				0F62451F19F60AD80032D5F6 /* AppDelegate.swift in Sources */,
+				0F88B47B19F61126002DAA38 /* SelectPuzzleImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +442,7 @@
 				0F62453A19F60AD80032D5F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0F62453B19F60AD80032D5F6 /* Build configuration list for PBXNativeTarget "SlidingImagePuzzleTests" */ = {
 			isa = XCConfigurationList;
@@ -405,6 +451,7 @@
 				0F62453D19F60AD80032D5F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
