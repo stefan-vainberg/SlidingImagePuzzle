@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0F11B7DA19FC2DE100058274 /* cameraRollCollection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F11B7D919FC2DE100058274 /* cameraRollCollection@2x.png */; };
 		0F11B7DC19FC2E0400058274 /* cameraRollCollection@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F11B7DB19FC2E0400058274 /* cameraRollCollection@3x.png */; };
+		0F454DBC19FC5AF600D234D2 /* UserAlbumCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F454DBB19FC5AF600D234D2 /* UserAlbumCollectionViewController.swift */; };
+		0F454DBE19FDD19400D234D2 /* UserAlbumCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F454DBD19FDD19400D234D2 /* UserAlbumCollectionView.swift */; };
+		0F454DC219FDDCBE00D234D2 /* UserAlbumCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F454DC119FDDCBE00D234D2 /* UserAlbumCollectionViewDataSource.swift */; };
 		0F62451F19F60AD80032D5F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F62451E19F60AD80032D5F6 /* AppDelegate.swift */; };
 		0F62452619F60AD80032D5F6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F62452519F60AD80032D5F6 /* Images.xcassets */; };
 		0F62452919F60AD80032D5F6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F62452719F60AD80032D5F6 /* LaunchScreen.xib */; };
@@ -32,6 +35,9 @@
 /* Begin PBXFileReference section */
 		0F11B7D919FC2DE100058274 /* cameraRollCollection@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameraRollCollection@2x.png"; sourceTree = "<group>"; };
 		0F11B7DB19FC2E0400058274 /* cameraRollCollection@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameraRollCollection@3x.png"; sourceTree = "<group>"; };
+		0F454DBB19FC5AF600D234D2 /* UserAlbumCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAlbumCollectionViewController.swift; sourceTree = "<group>"; };
+		0F454DBD19FDD19400D234D2 /* UserAlbumCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAlbumCollectionView.swift; sourceTree = "<group>"; };
+		0F454DC119FDDCBE00D234D2 /* UserAlbumCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAlbumCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		0F62451919F60AD80032D5F6 /* SlidingImagePuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlidingImagePuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F62451D19F60AD80032D5F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F62451E19F60AD80032D5F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +77,25 @@
 				0F11B7DB19FC2E0400058274 /* cameraRollCollection@3x.png */,
 			);
 			name = "Image Resources";
+			sourceTree = "<group>";
+		};
+		0F454DB919FC586B00D234D2 /* Handling User Images */ = {
+			isa = PBXGroup;
+			children = (
+				0F454DBB19FC5AF600D234D2 /* UserAlbumCollectionViewController.swift */,
+				0F454DBD19FDD19400D234D2 /* UserAlbumCollectionView.swift */,
+				0F454DC119FDDCBE00D234D2 /* UserAlbumCollectionViewDataSource.swift */,
+			);
+			name = "Handling User Images";
+			sourceTree = "<group>";
+		};
+		0F454DBA19FC5AD700D234D2 /* Initial State */ = {
+			isa = PBXGroup;
+			children = (
+				0F88B47819F6106A002DAA38 /* SelectPuzzleImageViewController.swift */,
+				0F88B47A19F61126002DAA38 /* SelectPuzzleImageView.swift */,
+			);
+			name = "Initial State";
 			sourceTree = "<group>";
 		};
 		0F62451019F60AD80032D5F6 = {
@@ -142,8 +167,8 @@
 		0F88B47719F61053002DAA38 /* Puzzle Selection */ = {
 			isa = PBXGroup;
 			children = (
-				0F88B47819F6106A002DAA38 /* SelectPuzzleImageViewController.swift */,
-				0F88B47A19F61126002DAA38 /* SelectPuzzleImageView.swift */,
+				0F454DBA19FC5AD700D234D2 /* Initial State */,
+				0F454DB919FC586B00D234D2 /* Handling User Images */,
 			);
 			name = "Puzzle Selection";
 			sourceTree = "<group>";
@@ -250,8 +275,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F454DBE19FDD19400D234D2 /* UserAlbumCollectionView.swift in Sources */,
 				0F62454219F60D740032D5F6 /* WorkspaceView.swift in Sources */,
+				0F454DBC19FC5AF600D234D2 /* UserAlbumCollectionViewController.swift in Sources */,
 				0F88B47919F6106A002DAA38 /* SelectPuzzleImageViewController.swift in Sources */,
+				0F454DC219FDDCBE00D234D2 /* UserAlbumCollectionViewDataSource.swift in Sources */,
 				0F62453F19F60D180032D5F6 /* WorkspaceViewController.swift in Sources */,
 				0F62451F19F60AD80032D5F6 /* AppDelegate.swift in Sources */,
 				0F88B47B19F61126002DAA38 /* SelectPuzzleImageView.swift in Sources */,
@@ -373,6 +401,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SlidingImagePuzzle/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -384,6 +413,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SlidingImagePuzzle/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

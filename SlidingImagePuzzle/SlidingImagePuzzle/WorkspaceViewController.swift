@@ -9,12 +9,13 @@
 import Foundation
 import UIKit
 
-class WorkspaceViewController : UIViewController
+class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControllerDelegate
 {
 
     // PRIVATE VARIABLES
     
     private var selectImageController:SelectPuzzleImageViewController?
+    private var imagesCollectionController:UserAlbumCollectionViewController?
     private var workspace:WorkspaceView?
 
     //INITIALIZING
@@ -22,6 +23,10 @@ class WorkspaceViewController : UIViewController
     func initialize() -> Void
     {
         selectImageController = SelectPuzzleImageViewController()
+        selectImageController!.delegate = self
+        
+        imagesCollectionController = UserAlbumCollectionViewController()
+        
         workspace = WorkspaceView()
     }
     
@@ -74,6 +79,25 @@ class WorkspaceViewController : UIViewController
         self.addChildViewController(selectImageController!)
         workspace!.addSubview(selectImageController!.view)
         self.selectImageController!.didMoveToParentViewController(self)
+        self.selectImageController!.view.frame = workspace!.bounds
+    }
+    
+    
+    // SelectPuzzleImageViewControllerDelegate
+    
+    func didSelectPuzzleImageViewButton() -> Void
+    {
+        
+        // remove the selectImageController, and replace it with the select Images Controller
+        self.selectImageController!.willMoveToParentViewController(nil)
+        self.selectImageController!.view.removeFromSuperview()
+        self.selectImageController!.removeFromParentViewController()
+
+        
+        self.addChildViewController(self.imagesCollectionController!)
+        workspace!.addSubview(self.imagesCollectionController!.view)
+        self.imagesCollectionController!.didMoveToParentViewController(self)
+        self.imagesCollectionController!.view.frame = workspace!.bounds
     }
     
 }

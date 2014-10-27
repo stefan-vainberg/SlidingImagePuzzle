@@ -23,7 +23,6 @@ class SelectPuzzleImageView : UIView
     convenience override init()
     {
         self.init(frame:CGRectZero)
-        self.setupViewBorder()
         self.setupInternalImage()
     }
     
@@ -36,13 +35,6 @@ class SelectPuzzleImageView : UIView
     }
     
     
-    // SETUP VIEW
-    func setupViewBorder() -> Void
-    {
-        self.layer.borderColor = UIColor.blackColor().CGColor
-        self.layer.borderWidth = 1.5
-        self.layer.cornerRadius = 3.0
-    }
     
     func setupInternalImage() -> Void
     {

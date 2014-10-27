@@ -9,9 +9,15 @@
 import Foundation
 import UIKit
 
+protocol SelectPuzzleImageViewControllerDelegate
+{
+    func didSelectPuzzleImageViewButton() -> Void;
+}
+
 class SelectPuzzleImageViewController : UIViewController, SelectPuzzleImageViewDelegate
 {
     private var puzzleImageView:SelectPuzzleImageView?
+    var delegate:SelectPuzzleImageViewControllerDelegate?
     
     required init(coder aDecoder: NSCoder)
     {
@@ -37,6 +43,7 @@ class SelectPuzzleImageViewController : UIViewController, SelectPuzzleImageViewD
         puzzleImageView = SelectPuzzleImageView()
         puzzleImageView!.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
         puzzleImageView!.setTranslatesAutoresizingMaskIntoConstraints(false)
+        puzzleImageView!.delegate = self;
         self.view.addSubview(puzzleImageView!)
         
         // constraint puzzle image view to the superview
@@ -48,10 +55,6 @@ class SelectPuzzleImageViewController : UIViewController, SelectPuzzleImageViewD
         self.view.addConstraint(NSLayoutConstraint(item: puzzleImageView!, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
 
         self.view.addConstraint(NSLayoutConstraint(item: puzzleImageView!, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
-
-        
-     //   let puzzleImage = self.view as SelectPuzzleImageView
-     //   puzzleImage.delegate = self
 
     }
     
@@ -69,5 +72,6 @@ class SelectPuzzleImageViewController : UIViewController, SelectPuzzleImageViewD
     func  didSelectImageCollectionButton() ->Void
     {
         // we now want to let the user select an image from their camera
+        delegate!.didSelectPuzzleImageViewButton()
     }
 }
