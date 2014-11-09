@@ -11,6 +11,9 @@ import UIKit
 
 class UserAlbumCollectionView : UIView
 {
+    // PUBLIC
+    var cellSize:CGSize?
+    
     // PRIVATE
     private var collectionView:UICollectionView?
     
@@ -32,11 +35,15 @@ class UserAlbumCollectionView : UIView
     {
         self.setTranslatesAutoresizingMaskIntoConstraints(false)
         let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSizeMake(150, 150)
+        layout.sectionInset = UIEdgeInsetsMake(5.0, 5.0, 5.0, 5.0)
+        self.cellSize = layout.itemSize
         collectionView = UICollectionView(frame: self.frame, collectionViewLayout: layout)
         collectionView!.delegate = del
         collectionView!.dataSource = dataSrc
         collectionView!.setTranslatesAutoresizingMaskIntoConstraints(false)
         collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "userAlbumCell")
+        collectionView!.backgroundColor = UIColor.whiteColor()
         self.addSubview(collectionView!)
         
         // constrain the collectionView

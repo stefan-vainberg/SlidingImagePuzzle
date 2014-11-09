@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControllerDelegate
+class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControllerDelegate, UserAlbumCollectionViewControllerDelegate
 {
 
     // PRIVATE VARIABLES
@@ -98,6 +98,14 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
         workspace!.addSubview(self.imagesCollectionController!.view)
         self.imagesCollectionController!.didMoveToParentViewController(self)
         self.imagesCollectionController!.view.frame = workspace!.bounds
+        self.imagesCollectionController!.delegate = self
+    }
+    
+    // UserAlbumCollectionViewControllerDelegate
+    func didSelectImageFromCollection(image: UIImage) {
+        self.imagesCollectionController!.willMoveToParentViewController(nil)
+        self.imagesCollectionController!.view.removeFromSuperview()
+        self.imagesCollectionController!.removeFromParentViewController()
     }
     
 }

@@ -11,6 +11,11 @@ import UIKit
 import Photos
 import AssetsLibrary
 
+protocol UserAlbumCollectionViewControllerDelegate
+{
+    func didSelectImageFromCollection(image:UIImage) -> Void
+}
+
 class UserAlbumCollectionViewController : UIViewController, UICollectionViewDelegate
 {
     
@@ -28,7 +33,7 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
         self.init(nibName: nil, bundle: nil)
     }
 
-    
+    var delegate:UserAlbumCollectionViewControllerDelegate?
     
     // PRIVATE
     private var albumView:UserAlbumCollectionView?
@@ -89,10 +94,18 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
             var assets: [PHAsset] = []
             results.enumerateObjectsUsingBlock { (object, idx, _) in
                 if let asset = object as? PHAsset {
-                    PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: CGSize(width: 100.0, height: 100.0), contentMode: .AspectFill, options: nil) { (result, _) in
-                        self.albumViewDataSource!.imagesToDisplay!.append(result)
+                    let requestOptions = PHImageRequestOptions()
+                    requestOptions.version = PHImageRequestOptionsVersion.Current
+                    
+                    PHImageManager.defaultManager().requestImageDataForAsset(asset, options: requestOptions, resultHandler: { (result, metadata, orientation, _) -> Void in
+                        let imageFromData = UIImage(data: result)
+                        let properlyRotateImage = UIImage(CGImage: imageFromData!.CGImage, scale: 1.0, orientation: orientation)
+                        
+                        let scaledImage = self.scaleImageToFitCollectionCell(properlyRotateImage!)
+                        
+                        self.albumViewDataSource!.imagesToDisplay!.append(scaledImage)
                         self.albumView!.reloadData()
-                    }
+                    })
                     assets.append(asset)
                 }
             }
@@ -100,5 +113,30 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
         }
 
     }
-
+    
+    func scaleImageToFitCollectionCell(image: UIImage) -> UIImage
+    {
+        let collectionViewCellSize = self.albumView!.cellSize!
+        
+        // we need to figure out the appropriate amount to scale down
+        let scaleDownWidthFactor = ceil(image.size.width / collectionViewCellSize.width)
+        let scaleDownHeightFactor = ceil(image.size.height / collectionViewCellSize.height)
+        
+        let finalScaleDownFactor = max(scaleDownWidthFactor, scaleDownHeightFactor)
+        
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(image.size.width / finalScaleDownFactor, image.size.height / finalScaleDownFactor), false, 0.0)
+        image.drawInRect(CGRectMake(0, 0, image.size.width / finalScaleDownFactor, image.size.height / finalScaleDownFactor))
+        
+        let returnImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return returnImage
+    }
+    
+    
+    // UICOllectionViewDelegate methods
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.delegate!.didSelectImageFromCollection(self.albumViewDataSource!.imagesToDisplay![indexPath.item])
+    }
 }

@@ -30,6 +30,10 @@ class UserAlbumCollectionViewDataSource : NSObject, UICollectionViewDataSource
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("userAlbumCell", forIndexPath: indexPath) as UICollectionViewCell
         let imageView = UIImageView(image: self.imagesToDisplay![indexPath.row])
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 3.0
+        imageView.layer.borderColor = UIColor.lightGrayColor().CGColor
+        imageView.layer.borderWidth = 0.5
         
         cell.contentView.addSubview(imageView)
         
