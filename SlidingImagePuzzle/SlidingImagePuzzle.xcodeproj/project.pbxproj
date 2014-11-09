@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0F11B7DA19FC2DE100058274 /* cameraRollCollection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F11B7D919FC2DE100058274 /* cameraRollCollection@2x.png */; };
 		0F11B7DC19FC2E0400058274 /* cameraRollCollection@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F11B7DB19FC2E0400058274 /* cameraRollCollection@3x.png */; };
+		0F240C691A0EF7FC0096073C /* PuzzleBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F240C681A0EF7FC0096073C /* PuzzleBoardViewController.swift */; };
+		0F240C6B1A0EFB2A0096073C /* PuzzleBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F240C6A1A0EFB2A0096073C /* PuzzleBoardView.swift */; };
 		0F454DBC19FC5AF600D234D2 /* UserAlbumCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F454DBB19FC5AF600D234D2 /* UserAlbumCollectionViewController.swift */; };
 		0F454DBE19FDD19400D234D2 /* UserAlbumCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F454DBD19FDD19400D234D2 /* UserAlbumCollectionView.swift */; };
 		0F454DC219FDDCBE00D234D2 /* UserAlbumCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F454DC119FDDCBE00D234D2 /* UserAlbumCollectionViewDataSource.swift */; };
@@ -35,6 +37,8 @@
 /* Begin PBXFileReference section */
 		0F11B7D919FC2DE100058274 /* cameraRollCollection@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameraRollCollection@2x.png"; sourceTree = "<group>"; };
 		0F11B7DB19FC2E0400058274 /* cameraRollCollection@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameraRollCollection@3x.png"; sourceTree = "<group>"; };
+		0F240C681A0EF7FC0096073C /* PuzzleBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleBoardViewController.swift; sourceTree = "<group>"; };
+		0F240C6A1A0EFB2A0096073C /* PuzzleBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleBoardView.swift; sourceTree = "<group>"; };
 		0F454DBB19FC5AF600D234D2 /* UserAlbumCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAlbumCollectionViewController.swift; sourceTree = "<group>"; };
 		0F454DBD19FDD19400D234D2 /* UserAlbumCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAlbumCollectionView.swift; sourceTree = "<group>"; };
 		0F454DC119FDDCBE00D234D2 /* UserAlbumCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAlbumCollectionViewDataSource.swift; sourceTree = "<group>"; };
@@ -79,6 +83,23 @@
 			name = "Image Resources";
 			sourceTree = "<group>";
 		};
+		0F240C661A0EF7470096073C /* Image Game Manipulation */ = {
+			isa = PBXGroup;
+			children = (
+				0F240C671A0EF7C70096073C /* Puzzle Board */,
+			);
+			name = "Image Game Manipulation";
+			sourceTree = "<group>";
+		};
+		0F240C671A0EF7C70096073C /* Puzzle Board */ = {
+			isa = PBXGroup;
+			children = (
+				0F240C681A0EF7FC0096073C /* PuzzleBoardViewController.swift */,
+				0F240C6A1A0EFB2A0096073C /* PuzzleBoardView.swift */,
+			);
+			name = "Puzzle Board";
+			sourceTree = "<group>";
+		};
 		0F454DB919FC586B00D234D2 /* Handling User Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +140,7 @@
 		0F62451B19F60AD80032D5F6 /* SlidingImagePuzzle */ = {
 			isa = PBXGroup;
 			children = (
+				0F240C661A0EF7470096073C /* Image Game Manipulation */,
 				0F88B47719F61053002DAA38 /* Puzzle Selection */,
 				0F62454019F60D5A0032D5F6 /* Workspace */,
 				0F62451E19F60AD80032D5F6 /* AppDelegate.swift */,
@@ -279,8 +301,10 @@
 				0F62454219F60D740032D5F6 /* WorkspaceView.swift in Sources */,
 				0F454DBC19FC5AF600D234D2 /* UserAlbumCollectionViewController.swift in Sources */,
 				0F88B47919F6106A002DAA38 /* SelectPuzzleImageViewController.swift in Sources */,
+				0F240C691A0EF7FC0096073C /* PuzzleBoardViewController.swift in Sources */,
 				0F454DC219FDDCBE00D234D2 /* UserAlbumCollectionViewDataSource.swift in Sources */,
 				0F62453F19F60D180032D5F6 /* WorkspaceViewController.swift in Sources */,
+				0F240C6B1A0EFB2A0096073C /* PuzzleBoardView.swift in Sources */,
 				0F62451F19F60AD80032D5F6 /* AppDelegate.swift in Sources */,
 				0F88B47B19F61126002DAA38 /* SelectPuzzleImageView.swift in Sources */,
 			);

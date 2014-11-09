@@ -104,6 +104,7 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
                         let scaledImage = self.scaleImageToFitCollectionCell(properlyRotateImage!)
                         
                         self.albumViewDataSource!.imagesToDisplay!.append(scaledImage)
+                        self.albumViewDataSource!.fullSizeImages!.append(properlyRotateImage!)
                         self.albumView!.reloadData()
                     })
                     assets.append(asset)
@@ -137,6 +138,6 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
     // UICOllectionViewDelegate methods
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.delegate!.didSelectImageFromCollection(self.albumViewDataSource!.imagesToDisplay![indexPath.item])
+        self.delegate!.didSelectImageFromCollection(self.albumViewDataSource!.fullSizeImages![indexPath.item])
     }
 }

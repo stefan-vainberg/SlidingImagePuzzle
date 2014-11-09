@@ -16,6 +16,7 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
     
     private var selectImageController:SelectPuzzleImageViewController?
     private var imagesCollectionController:UserAlbumCollectionViewController?
+    private var puzzleBoardViewController:PuzzleBoardViewController?
     private var workspace:WorkspaceView?
 
     //INITIALIZING
@@ -106,6 +107,31 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
         self.imagesCollectionController!.willMoveToParentViewController(nil)
         self.imagesCollectionController!.view.removeFromSuperview()
         self.imagesCollectionController!.removeFromParentViewController()
+        
+        self.puzzleBoardViewController = PuzzleBoardViewController(image: self.scaleImageToFitWorkspace(image))
+        self.addChildViewController(self.puzzleBoardViewController!)
+        workspace!.addSubview(self.puzzleBoardViewController!.view)
+        self.puzzleBoardViewController!.didMoveToParentViewController(self)
+        self.puzzleBoardViewController!.view.frame = workspace!.bounds
     }
     
+    func scaleImageToFitWorkspace(image:UIImage) -> UIImage
+    {
+        let workspaceSize = workspace!.bounds
+        
+        // we need to figure out the appropriate amount to scale down
+        let scaleDownWidthFactor = ceil(image.size.width / workspaceSize.width)
+        let scaleDownHeightFactor = ceil(image.size.height / workspaceSize.height)
+        
+        let finalScaleDownFactor = max(scaleDownWidthFactor, scaleDownHeightFactor)
+        
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(image.size.width / finalScaleDownFactor, image.size.height / finalScaleDownFactor), false, 0.0)
+        image.drawInRect(CGRectMake(0, 0, image.size.width / finalScaleDownFactor, image.size.height / finalScaleDownFactor))
+        
+        let returnImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return returnImage
+
+    }
 }

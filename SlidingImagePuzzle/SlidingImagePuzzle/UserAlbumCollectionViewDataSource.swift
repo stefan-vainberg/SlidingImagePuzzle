@@ -14,6 +14,7 @@ import Photos
 class UserAlbumCollectionViewDataSource : NSObject, UICollectionViewDataSource
 {
     var imagesToDisplay:[UIImage]?
+    var fullSizeImages:[UIImage]?
     
     override init() {
         super.init()
@@ -23,6 +24,7 @@ class UserAlbumCollectionViewDataSource : NSObject, UICollectionViewDataSource
     func Initialize() -> Void
     {
         self.imagesToDisplay = []
+        self.fullSizeImages = []
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
