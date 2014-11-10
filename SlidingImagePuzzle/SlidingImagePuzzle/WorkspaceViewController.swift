@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControllerDelegate, UserAlbumCollectionViewControllerDelegate
+class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControllerDelegate, UserAlbumCollectionViewControllerDelegate, PuzzleBoardViewControllerDelegate
 {
 
     // PRIVATE VARIABLES
@@ -109,6 +109,7 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
         self.imagesCollectionController!.removeFromParentViewController()
         
         self.puzzleBoardViewController = PuzzleBoardViewController(image: self.scaleImageToFitWorkspace(image))
+        self.puzzleBoardViewController!.delegate = self
         self.addChildViewController(self.puzzleBoardViewController!)
         workspace!.addSubview(self.puzzleBoardViewController!.view)
         self.puzzleBoardViewController!.didMoveToParentViewController(self)
@@ -117,6 +118,7 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
     
     func scaleImageToFitWorkspace(image:UIImage) -> UIImage
     {
+        
         let workspaceSize = workspace!.bounds
         
         // we need to figure out the appropriate amount to scale down
@@ -133,5 +135,11 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
         
         return returnImage
 
+    }
+    
+    // PuzzleBoardViewControllerDelegate
+    
+    func didFinishGeneratingPuzzle() {
+        self.workspace!.layer.borderColor = UIColor.clearColor().CGColor
     }
 }

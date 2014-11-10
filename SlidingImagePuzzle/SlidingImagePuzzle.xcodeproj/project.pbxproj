@@ -11,6 +11,8 @@
 		0F11B7DC19FC2E0400058274 /* cameraRollCollection@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F11B7DB19FC2E0400058274 /* cameraRollCollection@3x.png */; };
 		0F240C691A0EF7FC0096073C /* PuzzleBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F240C681A0EF7FC0096073C /* PuzzleBoardViewController.swift */; };
 		0F240C6B1A0EFB2A0096073C /* PuzzleBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F240C6A1A0EFB2A0096073C /* PuzzleBoardView.swift */; };
+		0F240C6D1A0F072A0096073C /* PuzzleGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F240C6C1A0F072A0096073C /* PuzzleGameController.swift */; };
+		0F240C711A106D670096073C /* PuzzleGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F240C701A106D670096073C /* PuzzleGestureHandler.swift */; };
 		0F454DBC19FC5AF600D234D2 /* UserAlbumCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F454DBB19FC5AF600D234D2 /* UserAlbumCollectionViewController.swift */; };
 		0F454DBE19FDD19400D234D2 /* UserAlbumCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F454DBD19FDD19400D234D2 /* UserAlbumCollectionView.swift */; };
 		0F454DC219FDDCBE00D234D2 /* UserAlbumCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F454DC119FDDCBE00D234D2 /* UserAlbumCollectionViewDataSource.swift */; };
@@ -39,6 +41,9 @@
 		0F11B7DB19FC2E0400058274 /* cameraRollCollection@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameraRollCollection@3x.png"; sourceTree = "<group>"; };
 		0F240C681A0EF7FC0096073C /* PuzzleBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleBoardViewController.swift; sourceTree = "<group>"; };
 		0F240C6A1A0EFB2A0096073C /* PuzzleBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleBoardView.swift; sourceTree = "<group>"; };
+		0F240C6C1A0F072A0096073C /* PuzzleGameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleGameController.swift; sourceTree = "<group>"; };
+		0F240C701A106D670096073C /* PuzzleGestureHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleGestureHandler.swift; sourceTree = "<group>"; };
+		0F240C731A10827D0096073C /* SlidingImagePuzzle-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SlidingImagePuzzle-Bridging-Header.h"; sourceTree = "<group>"; };
 		0F454DBB19FC5AF600D234D2 /* UserAlbumCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAlbumCollectionViewController.swift; sourceTree = "<group>"; };
 		0F454DBD19FDD19400D234D2 /* UserAlbumCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAlbumCollectionView.swift; sourceTree = "<group>"; };
 		0F454DC119FDDCBE00D234D2 /* UserAlbumCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAlbumCollectionViewDataSource.swift; sourceTree = "<group>"; };
@@ -96,6 +101,9 @@
 			children = (
 				0F240C681A0EF7FC0096073C /* PuzzleBoardViewController.swift */,
 				0F240C6A1A0EFB2A0096073C /* PuzzleBoardView.swift */,
+				0F240C701A106D670096073C /* PuzzleGestureHandler.swift */,
+				0F240C6C1A0F072A0096073C /* PuzzleGameController.swift */,
+				0F240C731A10827D0096073C /* SlidingImagePuzzle-Bridging-Header.h */,
 			);
 			name = "Puzzle Board";
 			sourceTree = "<group>";
@@ -300,8 +308,10 @@
 				0F454DBE19FDD19400D234D2 /* UserAlbumCollectionView.swift in Sources */,
 				0F62454219F60D740032D5F6 /* WorkspaceView.swift in Sources */,
 				0F454DBC19FC5AF600D234D2 /* UserAlbumCollectionViewController.swift in Sources */,
+				0F240C711A106D670096073C /* PuzzleGestureHandler.swift in Sources */,
 				0F88B47919F6106A002DAA38 /* SelectPuzzleImageViewController.swift in Sources */,
 				0F240C691A0EF7FC0096073C /* PuzzleBoardViewController.swift in Sources */,
+				0F240C6D1A0F072A0096073C /* PuzzleGameController.swift in Sources */,
 				0F454DC219FDDCBE00D234D2 /* UserAlbumCollectionViewDataSource.swift in Sources */,
 				0F62453F19F60D180032D5F6 /* WorkspaceViewController.swift in Sources */,
 				0F240C6B1A0EFB2A0096073C /* PuzzleBoardView.swift in Sources */,
@@ -378,6 +388,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "SlidingImagePuzzle/SlidingImagePuzzle-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -414,6 +425,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "SlidingImagePuzzle/SlidingImagePuzzle-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -423,11 +435,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SlidingImagePuzzle/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SlidingImagePuzzle/SlidingImagePuzzle-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -435,11 +450,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SlidingImagePuzzle/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SlidingImagePuzzle/SlidingImagePuzzle-Bridging-Header.h";
 			};
 			name = Release;
 		};
