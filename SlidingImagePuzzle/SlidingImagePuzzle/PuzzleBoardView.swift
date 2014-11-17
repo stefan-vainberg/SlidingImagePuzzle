@@ -14,6 +14,7 @@ class PuzzleBoardView : UIView
     
     // PUBLICS
     var boardGameSize:CGSize?
+    var board:([[UIImageView]])?
     
     //PRIVATES
     private var internalImageView:UIImageView?
@@ -38,6 +39,8 @@ class PuzzleBoardView : UIView
     // GENERIC INITIALIZER
     func initializeView(image:UIImage) -> Void
     {
+        // add the reference holder of pieces
+        board = []
         
         // add the recognizer
         puzzleGestureRecognizer = PuzzleGestureHandler()
@@ -66,6 +69,7 @@ class PuzzleBoardView : UIView
     
     func UpdateWithPuzzlePieces(pieces:[[UIImage]]) -> Void
     {
+        
         let sampleImage = pieces[0][0]
         
         let totalHeight = CGFloat(pieces.count) * sampleImage.size.height
@@ -79,6 +83,7 @@ class PuzzleBoardView : UIView
         
         var currentRow = 0
         var currentColumn = 0
+        var fullColumn:[UIImageView] = []
         for row in pieces
         {
             for image in row
@@ -86,8 +91,11 @@ class PuzzleBoardView : UIView
                 let correspondingImageView = UIImageView(image: image)
                 correspondingImageView.frame = CGRectMake(CGFloat(currentColumn)*(image.size.width+1), CGFloat(currentRow)*(image.size.height+1), image.size.width, image.size.height)
                 self.addSubview(correspondingImageView)
+                fullColumn.append(correspondingImageView)
                 currentColumn++
             }
+            board!.append(fullColumn)
+            fullColumn = []
             currentRow++
             currentColumn = 0
         }
@@ -98,5 +106,27 @@ class PuzzleBoardView : UIView
         internalImageView!.image = image
     }
     
+    func BlackOutPiece(pieceLocation:(row:Int, column:Int))
+    {
+        let pieceToBlackOut = board![pieceLocation.row][pieceLocation.column]
+        let blackView = UIView(frame: CGRectMake(0, 0, pieceToBlackOut.bounds.size.width, pieceToBlackOut.bounds.size.height))
+        blackView.backgroundColor = UIColor.blackColor()
+        blackView.alpha = 1.0
+        pieceToBlackOut.addSubview(blackView)
+
+        /*
+        UIView.animateWithDuration(0.1, delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
+            animations: { () -> Void in
+                blackView.alpha = 1.0
+            },
+            completion: {(Bool) -> Void in
+                let movingView = self.board![pieceLocation.row][pieceLocation.column+1]
+                UIView.animateWithDuration(1.5, animations: { () -> Void in
+                    movingView.center = CGPointMake(pieceToBlackOut.center.x, movingView.center.y)
+                })
+            }
+        )
+        */
+    }
     
 }

@@ -30,7 +30,7 @@ class PuzzleBoardViewController : UIViewController
     {
         self.init()
         initialImage = image
-        puzzlePieceSize = 75
+        puzzlePieceSize = 150
         self.puzzlePieces = []
 
         
@@ -92,10 +92,10 @@ class PuzzleBoardViewController : UIViewController
         
     }
     
-
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        self.BeginGame()
         
         
     }
@@ -136,6 +136,22 @@ class PuzzleBoardViewController : UIViewController
             }
         }
     }
-
+    
+    func BeginGame() -> Void
+    {
+        // first step is to black out one random piece, thereby removing it from the image. This is now the piece that can be moved over
+        let randomRow = arc4random_uniform(UInt32(self.puzzlePieces!.count))
+        let randomColumn = arc4random_uniform(UInt32(self.puzzlePieces![0].count))
+        self.puzzleBoardView!.BlackOutPiece((Int(randomRow), Int(randomColumn)))
+        
+        let blackImageView = puzzleBoardView!.board![Int(randomRow)][Int(randomColumn)]
+        
+        let initialGameGenerator = PuzzleGameController(blackedOutImage: blackImageView)
+        initialGameGenerator.GenerateInitialGameTileMovements(200, imagesArray: &self.puzzleBoardView!.board!, illegalTouchDirection: TouchDirection.None)
+        
+        //initialGameGenerator(blackImageView, &puzzleBoardView!.board!)
+        
+        
+    }
     
 }

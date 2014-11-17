@@ -15,6 +15,7 @@ enum TouchDirection
     case Down
     case Left
     case Right
+    case None
 }
 
 protocol PuzzleGestureHandlerDelegate
@@ -34,10 +35,17 @@ class PuzzleGestureHandler : UIGestureRecognizer
     override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!) {
         super.touchesBegan(touches, withEvent: event)
         startingPoint = touches.anyObject()!.locationInView(self.view)
+        
     }
     
     override func touchesMoved(touches: NSSet!, withEvent event: UIEvent!) {
         super.touchesEnded(touches, withEvent: event)
+        currentPoint = touches.anyObject()!.locationInView(self.view)
+        
+        
+        // try to figure out which direction the user is moving in
+        let horizontalDirection = currentPoint!.x - startingPoint!.x
+        let verticalDirection = currentPoint!.y - startingPoint!.y
     }
     
     override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!) {
