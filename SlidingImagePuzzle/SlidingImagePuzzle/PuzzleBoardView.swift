@@ -42,11 +42,6 @@ class PuzzleBoardView : UIView
         // add the reference holder of pieces
         board = []
         
-        // add the recognizer
-        puzzleGestureRecognizer = PuzzleGestureHandler()
-        self.addGestureRecognizer(puzzleGestureRecognizer!)
-        
-        
         self.clipsToBounds = true
         self.layer.borderColor = UIColor.blackColor().CGColor
         self.layer.borderWidth = 1.0
@@ -84,15 +79,18 @@ class PuzzleBoardView : UIView
         var currentRow = 0
         var currentColumn = 0
         var fullColumn:[UIImageView] = []
+        var imageTag = 0
         for row in pieces
         {
             for image in row
             {
                 let correspondingImageView = UIImageView(image: image)
+                correspondingImageView.tag = imageTag
                 correspondingImageView.frame = CGRectMake(CGFloat(currentColumn)*(image.size.width+1), CGFloat(currentRow)*(image.size.height+1), image.size.width, image.size.height)
                 self.addSubview(correspondingImageView)
                 fullColumn.append(correspondingImageView)
                 currentColumn++
+                imageTag++
             }
             board!.append(fullColumn)
             fullColumn = []
@@ -113,20 +111,32 @@ class PuzzleBoardView : UIView
         blackView.backgroundColor = UIColor.blackColor()
         blackView.alpha = 1.0
         pieceToBlackOut.addSubview(blackView)
+    }
+    
+    func PieceAtPoint(point:CGPoint) -> UIImageView
+    {
+        let locationOfPiece = self.arrayLocationOfPiece(point)
+        return board![locationOfPiece.row][locationOfPiece.column]
+    }
+    
+    func arrayLocationOfPiece(point:CGPoint) -> (row:Int, column:Int)
+    {
+        let samplePiece = board![0][0]
+        let samplePieceSize = samplePiece.bounds.size
+        
+        // figure out which row and column the piece is in
+        var pieceAtPointRow:Int = Int( floor(point.y / samplePieceSize.height) )
+        var pieceAtPointColumn:Int = Int( floor(point.x / samplePieceSize.width) )
+        
+        if (pieceAtPointColumn >= board![0].count) {
+            pieceAtPointColumn = board![0].count - 1
+        }
+        if (pieceAtPointRow >= board!.count) {
+            pieceAtPointRow = board!.count - 1
+        }
 
-        /*
-        UIView.animateWithDuration(0.1, delay: 0.0, options: UIViewAnimationOptions.CurveLinear,
-            animations: { () -> Void in
-                blackView.alpha = 1.0
-            },
-            completion: {(Bool) -> Void in
-                let movingView = self.board![pieceLocation.row][pieceLocation.column+1]
-                UIView.animateWithDuration(1.5, animations: { () -> Void in
-                    movingView.center = CGPointMake(pieceToBlackOut.center.x, movingView.center.y)
-                })
-            }
-        )
-        */
+        
+        return (pieceAtPointRow, pieceAtPointColumn)
     }
     
 }
