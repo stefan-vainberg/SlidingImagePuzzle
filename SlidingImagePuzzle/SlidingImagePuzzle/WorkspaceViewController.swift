@@ -75,6 +75,13 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
     }
     
     // SETUP VIEWS BASED ON GAME STATE
+    
+    func replayGame() -> Void
+    {
+        self.workspace!.layer.borderColor = UIColor.blackColor().CGColor
+        self.didSelectPuzzleImageViewButton()
+    }
+    
     func setupInitialImageSelectionStateView() -> Void
     {
         self.addChildViewController(selectImageController!)
@@ -90,9 +97,7 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
     {
         
         // remove the selectImageController, and replace it with the select Images Controller
-        self.selectImageController!.willMoveToParentViewController(nil)
-        self.selectImageController!.view.removeFromSuperview()
-        self.selectImageController!.removeFromParentViewController()
+        self.RemoveVC(self.selectImageController!)
 
         
         self.addChildViewController(self.imagesCollectionController!)
@@ -141,5 +146,30 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
     
     func didFinishGeneratingPuzzle() {
         self.workspace!.layer.borderColor = UIColor.clearColor().CGColor
+    }
+    
+    func didWinPuzzleGame() {
+        // remove the selectImageController, and replace it with the select Images Controller
+        self.RemoveVC(self.puzzleBoardViewController!)
+        self.replayGame()
+    }
+    
+    
+    // UTILITY
+    func RemoveVC(viewController:UIViewController) -> Void
+    {
+        viewController.willMoveToParentViewController(nil)
+        viewController.view.removeFromSuperview()
+        viewController.removeFromParentViewController()
+
+    }
+    
+    func AddVC(viewController:UIViewController) -> Void
+    {
+        self.addChildViewController(viewController)
+        workspace!.addSubview(viewController.view)
+        viewController.didMoveToParentViewController(self)
+        viewController.view.frame = workspace!.bounds
+
     }
 }

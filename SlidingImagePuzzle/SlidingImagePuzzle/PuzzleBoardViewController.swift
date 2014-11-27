@@ -285,7 +285,6 @@ class PuzzleBoardViewController : UIViewController, PuzzleGameControllerDelegate
                 (finished:Bool) -> Void in
                 if (finished) {
                     if(self.gameController!.CheckDidWinGame(self.puzzleBoardView!.board!)) {
-                        println("you win!")
                         self.didWinGame()
                     }
                 }
