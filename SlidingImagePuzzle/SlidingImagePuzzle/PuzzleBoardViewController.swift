@@ -12,6 +12,7 @@ import UIKit
 protocol PuzzleBoardViewControllerDelegate
 {
     func didFinishGeneratingPuzzle() -> Void
+    func didWinPuzzleGame() -> Void
 }
 
 class PuzzleBoardViewController : UIViewController, PuzzleGameControllerDelegate, PuzzleGestureHandlerDelegate
@@ -34,7 +35,7 @@ class PuzzleBoardViewController : UIViewController, PuzzleGameControllerDelegate
     {
         self.init()
         initialImage = image
-        puzzlePieceSize = 120
+        puzzlePieceSize = 300
         self.puzzlePieces = []
         
     }
@@ -170,23 +171,20 @@ class PuzzleBoardViewController : UIViewController, PuzzleGameControllerDelegate
     func didBeginPuzzleGesture(touchPoint: CGPoint) {
         currentlyMovingPuzzlePiece = self.puzzleBoardView!.PieceAtPoint(touchPoint)
         currentlyMovingPuzzlePieceInitialOrigin = currentlyMovingPuzzlePiece!.frame.origin
-    }
-    
-    func didMovePuzzleGesture(startingTouchPoint:CGPoint, currentTouchPoint:CGPoint, direction:TouchDirection) -> Void
-    {
-        // figure out which puzzle piece is getting touched
-        let selectedPiece = currentlyMovingPuzzlePiece!
-        let blackedOutPiece = self.gameController!.currentBlackedOutImage
-        let selectedPieceArrayLocation = self.puzzleBoardView!.arrayLocationOfPiece(startingTouchPoint)
-        let blackedOutPieceArrayLocation = self.gameController!.blackedOutImagePosition(self.puzzleBoardView!.board!)
         
         // we can't move the blacked out piece
-        if (selectedPiece == blackedOutPiece) {
+        if (currentlyMovingPuzzlePiece == self.gameController!.currentBlackedOutImage) {
             self.gameGestureHandler!.state = UIGestureRecognizerState.Failed
             return
         }
         
         // make sure that the black piece is adjacent to the selected piece
+        
+        // figure out which puzzle piece is getting touched
+        let selectedPiece = currentlyMovingPuzzlePiece!
+        let selectedPieceArrayLocation = self.puzzleBoardView!.arrayLocationOfPiece(touchPoint)
+        let blackedOutPieceArrayLocation = self.gameController!.blackedOutImagePosition(self.puzzleBoardView!.board!)
+
         
         if (selectedPieceArrayLocation.row == blackedOutPieceArrayLocation.row || selectedPieceArrayLocation.column == blackedOutPieceArrayLocation.column) {
             // we know that that the black piece is horizontally vertical to our targetted piece. now see if it's within one spot of it
@@ -196,8 +194,19 @@ class PuzzleBoardViewController : UIViewController, PuzzleGameControllerDelegate
             }
         }
         else {
+            self.gameGestureHandler!.state = UIGestureRecognizerState.Failed
             return
         }
+
+    }
+    
+    func didMovePuzzleGesture(startingTouchPoint:CGPoint, currentTouchPoint:CGPoint, direction:TouchDirection) -> Void
+    {
+        // figure out which puzzle piece is getting touched
+        let selectedPiece = currentlyMovingPuzzlePiece!
+        let blackedOutPiece = self.gameController!.currentBlackedOutImage
+        let selectedPieceArrayLocation = self.puzzleBoardView!.arrayLocationOfPiece(startingTouchPoint)
+        let blackedOutPieceArrayLocation = self.gameController!.blackedOutImagePosition(self.puzzleBoardView!.board!)
         
         // figure out the rectangle of possible motion for the piece.
         
@@ -244,7 +253,6 @@ class PuzzleBoardViewController : UIViewController, PuzzleGameControllerDelegate
 
             // don't want to move past the legal motion rect
             if (selectedPiece.frame.origin.y + frameMovement < legalMotionRect.origin.y || selectedPiece.frame.origin.y + selectedPiece.bounds.size.height + frameMovement > legalMotionRect.origin.y + legalMotionRect.size.height) {
-                self.gameGestureHandler!.state = UIGestureRecognizerState.Failed
                 return
             }
 
@@ -258,16 +266,38 @@ class PuzzleBoardViewController : UIViewController, PuzzleGameControllerDelegate
     {
         // the blacked out piece needs to be swapped in the board array wih the currently selected piece
         let blackedOutPieceLocation = self.gameController!.blackedOutImagePosition(self.puzzleBoardView!.board!)
-        let selectedPieceArrayLocation = self.puzzleBoardView!.arrayLocationOfPiece(currentTouchPoint)
+        let selectedPieceArrayLocation = self.puzzleBoardView!.arrayLocationOfPiece(CGPointMake(currentlyMovingPuzzlePieceInitialOrigin!.x + currentlyMovingPuzzlePiece!.bounds.size.width/2,
+            currentlyMovingPuzzlePieceInitialOrigin!.y + currentlyMovingPuzzlePiece!.bounds.size.height/2))
+        
+        
         
         let selectedPiece = self.puzzleBoardView!.board![selectedPieceArrayLocation.row][selectedPieceArrayLocation.column]
         
         self.puzzleBoardView!.board![selectedPieceArrayLocation.row][selectedPieceArrayLocation.column] = self.gameController!.currentBlackedOutImage
         self.puzzleBoardView!.board![blackedOutPieceLocation.row][blackedOutPieceLocation.column] = selectedPiece
         
-        selectedPiece.center = self.gameController!.currentBlackedOutImage.center
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
+        })
+        
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
+            selectedPiece.center = self.gameController!.currentBlackedOutImage.center
+            }){
+                (finished:Bool) -> Void in
+                if (finished) {
+                    if(self.gameController!.CheckDidWinGame(self.puzzleBoardView!.board!)) {
+                        println("you win!")
+                        self.didWinGame()
+                    }
+                }
+            }
         self.gameController!.currentBlackedOutImage.center = CGPointMake(currentlyMovingPuzzlePieceInitialOrigin!.x + selectedPiece.bounds.size.width/2,
                                                                          currentlyMovingPuzzlePieceInitialOrigin!.y + selectedPiece.bounds.size.height/2)
+    }
+    
+    func didWinGame() -> Void
+    {
+        self.gameController!.unBlackoutBlackImage()
+        self.delegate!.didWinPuzzleGame()
     }
 
     

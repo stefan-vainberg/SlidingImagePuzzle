@@ -142,7 +142,28 @@ class PuzzleGameController
             self.currentBlackedOutImage.center = randomlyChosenImageViewInitialCenter
             self.GenerateInitialGameTileMovements(numInitialMovements-1, imagesArray: &imagesArray, illegalTouchDirection: randomlyChosenIllegalTouchDirection)
         }
-
+    }
+    
+    func CheckDidWinGame(imagesArray: [[UIImageView]]) -> Bool
+    {
+        var currentTag = 0
+        for row in imagesArray {
+            for image in row {
+                if image.tag != currentTag {
+                    return false
+                }
+                currentTag++
+            }
+        }
+        
+        return true
+    }
+    
+    func unBlackoutBlackImage() -> Void
+    {
+        for subview in self.currentBlackedOutImage.subviews {
+            subview.removeFromSuperview()
+        }
     }
     
 }
