@@ -84,10 +84,7 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
     
     func setupInitialImageSelectionStateView() -> Void
     {
-        self.addChildViewController(selectImageController!)
-        workspace!.addSubview(selectImageController!.view)
-        self.selectImageController!.didMoveToParentViewController(self)
-        self.selectImageController!.view.frame = workspace!.bounds
+        self.AddVC(selectImageController!)
     }
     
     
@@ -99,26 +96,17 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
         // remove the selectImageController, and replace it with the select Images Controller
         self.RemoveVC(self.selectImageController!)
 
-        
-        self.addChildViewController(self.imagesCollectionController!)
-        workspace!.addSubview(self.imagesCollectionController!.view)
-        self.imagesCollectionController!.didMoveToParentViewController(self)
-        self.imagesCollectionController!.view.frame = workspace!.bounds
+        self.AddVC(self.imagesCollectionController!)
         self.imagesCollectionController!.delegate = self
     }
     
     // UserAlbumCollectionViewControllerDelegate
     func didSelectImageFromCollection(image: UIImage) {
-        self.imagesCollectionController!.willMoveToParentViewController(nil)
-        self.imagesCollectionController!.view.removeFromSuperview()
-        self.imagesCollectionController!.removeFromParentViewController()
+        self.RemoveVC(self.imagesCollectionController!)
         
         self.puzzleBoardViewController = PuzzleBoardViewController(image: self.scaleImageToFitWorkspace(image))
         self.puzzleBoardViewController!.delegate = self
-        self.addChildViewController(self.puzzleBoardViewController!)
-        workspace!.addSubview(self.puzzleBoardViewController!.view)
-        self.puzzleBoardViewController!.didMoveToParentViewController(self)
-        self.puzzleBoardViewController!.view.frame = workspace!.bounds
+        self.AddVC(self.puzzleBoardViewController!)
     }
     
     func scaleImageToFitWorkspace(image:UIImage) -> UIImage
