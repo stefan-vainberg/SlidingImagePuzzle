@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+
+
 class UserAlbumCollectionView : UIView
 {
     // PUBLIC
@@ -39,6 +41,7 @@ class UserAlbumCollectionView : UIView
         layout.sectionInset = UIEdgeInsetsMake(5.0, 5.0, 5.0, 5.0)
         self.cellSize = layout.itemSize
         collectionView = UICollectionView(frame: self.frame, collectionViewLayout: layout)
+        collectionView!.registerClass(AlbumCollectionViewCell.self, forCellWithReuseIdentifier: AlbumCollectionViewCell.reuseIdentifier())
         collectionView!.delegate = del
         collectionView!.dataSource = dataSrc
         collectionView!.setTranslatesAutoresizingMaskIntoConstraints(false)

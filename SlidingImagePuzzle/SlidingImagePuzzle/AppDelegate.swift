@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Photos
+import AssetsLibrary
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         if let unwrappedWindow = window{
+            
+            // get photo access. needed later on in the application
+            let assetsLibrary = ALAssetsLibrary()
+            assetsLibrary.enumerateGroupsWithTypes(ALAssetsGroupSavedPhotos, usingBlock: { (group, stop) -> Void in
+                }, failureBlock: { (error) -> Void in
+                
+            })
+            
             let vc = WorkspaceViewController()
             
             unwrappedWindow.backgroundColor = UIColor.whiteColor()

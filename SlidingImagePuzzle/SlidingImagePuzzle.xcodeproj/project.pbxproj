@@ -24,6 +24,9 @@
 		0F62454219F60D740032D5F6 /* WorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F62454119F60D740032D5F6 /* WorkspaceView.swift */; };
 		0F88B47919F6106A002DAA38 /* SelectPuzzleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F88B47819F6106A002DAA38 /* SelectPuzzleImageViewController.swift */; };
 		0F88B47B19F61126002DAA38 /* SelectPuzzleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F88B47A19F61126002DAA38 /* SelectPuzzleImageView.swift */; };
+		0FC2B9CA1A3427A80004ABB9 /* MultipleAlbumsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC2B9C91A3427A80004ABB9 /* MultipleAlbumsCollectionViewController.swift */; };
+		0FC2B9CE1A3427CF0004ABB9 /* MultipleAlbumsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC2B9CD1A3427CF0004ABB9 /* MultipleAlbumsCollectionViewDataSource.swift */; };
+		0FC2B9D01A3513AA0004ABB9 /* AlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC2B9CF1A3513AA0004ABB9 /* AlbumCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +62,9 @@
 		0F62454119F60D740032D5F6 /* WorkspaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceView.swift; sourceTree = "<group>"; };
 		0F88B47819F6106A002DAA38 /* SelectPuzzleImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPuzzleImageViewController.swift; sourceTree = "<group>"; };
 		0F88B47A19F61126002DAA38 /* SelectPuzzleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPuzzleImageView.swift; sourceTree = "<group>"; };
+		0FC2B9C91A3427A80004ABB9 /* MultipleAlbumsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleAlbumsCollectionViewController.swift; sourceTree = "<group>"; };
+		0FC2B9CD1A3427CF0004ABB9 /* MultipleAlbumsCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleAlbumsCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		0FC2B9CF1A3513AA0004ABB9 /* AlbumCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,9 +204,20 @@
 			isa = PBXGroup;
 			children = (
 				0F454DBA19FC5AD700D234D2 /* Initial State */,
+				0FC2B9C81A3424FD0004ABB9 /* Handling User Albums */,
 				0F454DB919FC586B00D234D2 /* Handling User Images */,
 			);
 			name = "Puzzle Selection";
+			sourceTree = "<group>";
+		};
+		0FC2B9C81A3424FD0004ABB9 /* Handling User Albums */ = {
+			isa = PBXGroup;
+			children = (
+				0FC2B9C91A3427A80004ABB9 /* MultipleAlbumsCollectionViewController.swift */,
+				0FC2B9CD1A3427CF0004ABB9 /* MultipleAlbumsCollectionViewDataSource.swift */,
+				0FC2B9CF1A3513AA0004ABB9 /* AlbumCollectionViewCell.swift */,
+			);
+			name = "Handling User Albums";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +269,7 @@
 				TargetAttributes = {
 					0F62451819F60AD80032D5F6 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = 58HP4T3ZJ9;
 					};
 					0F62452D19F60AD80032D5F6 = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -310,8 +328,11 @@
 				0F240C711A106D670096073C /* PuzzleGestureHandler.swift in Sources */,
 				0F88B47919F6106A002DAA38 /* SelectPuzzleImageViewController.swift in Sources */,
 				0F240C691A0EF7FC0096073C /* PuzzleBoardViewController.swift in Sources */,
+				0FC2B9CE1A3427CF0004ABB9 /* MultipleAlbumsCollectionViewDataSource.swift in Sources */,
 				0F240C6D1A0F072A0096073C /* PuzzleGameController.swift in Sources */,
 				0F454DC219FDDCBE00D234D2 /* UserAlbumCollectionViewDataSource.swift in Sources */,
+				0FC2B9D01A3513AA0004ABB9 /* AlbumCollectionViewCell.swift in Sources */,
+				0FC2B9CA1A3427A80004ABB9 /* MultipleAlbumsCollectionViewController.swift in Sources */,
 				0F62453F19F60D180032D5F6 /* WorkspaceViewController.swift in Sources */,
 				0F240C6B1A0EFB2A0096073C /* PuzzleBoardView.swift in Sources */,
 				0F62451F19F60AD80032D5F6 /* AppDelegate.swift in Sources */,

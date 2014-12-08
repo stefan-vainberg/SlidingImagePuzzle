@@ -1,8 +1,8 @@
 //
-//  UserAlbumCollectionViewController.swift
+//  MultipleAlbumsCollectionViewController.swift
 //  SlidingImagePuzzle
 //
-//  Created by Stefan Vainberg on 10/25/14.
+//  Created by Stefan Vainberg on 12/6/14.
 //  Copyright (c) 2014 Stefan. All rights reserved.
 //
 
@@ -11,14 +11,14 @@ import UIKit
 import Photos
 import AssetsLibrary
 
-protocol UserAlbumCollectionViewControllerDelegate
+protocol MultipleAlbumsCollectionViewControllerDelegate
 {
-    func didSelectImageFromCollection(image:UIImage) -> Void
+    func didSelectAlbumFromCollection(albumIdentifier:String) -> Void
 }
 
-class UserAlbumCollectionViewController : UIViewController, UICollectionViewDelegate
+class MultipleAlbumsCollectionViewController : UIViewController, UICollectionViewDelegate
 {
-    
+    // INITIALIZERS
     required init(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
@@ -32,13 +32,14 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
     {
         self.init(nibName: nil, bundle: nil)
     }
-
-    var delegate:UserAlbumCollectionViewControllerDelegate?
     
+    // DELEGATE
+    var delegate:MultipleAlbumsCollectionViewControllerDelegate?
+
     // PRIVATE
     private var albumView:UserAlbumCollectionView?
-    private var albumViewDataSource:UserAlbumCollectionViewDataSource?
-    
+    private var albumViewDataSource:MultipleAlbumsCollectionViewDataSource?
+
     override func loadView()
     {
         super.loadView()
@@ -46,7 +47,7 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
         self.view.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
         //self.view.setTranslatesAutoresizingMaskIntoConstraints(false)
         
-        albumViewDataSource = UserAlbumCollectionViewDataSource()
+        albumViewDataSource = MultipleAlbumsCollectionViewDataSource()
         albumView = UserAlbumCollectionView(delegate: self, dataSource: albumViewDataSource!)
         albumView!.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
         albumView!.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -59,9 +60,9 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
         self.view.addConstraint(NSLayoutConstraint(item: albumView!, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
         
         self.view.addConstraint(NSLayoutConstraint(item: albumView!, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
-
+        
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,17 +70,17 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
         let photoStatus =  ALAssetsLibrary.authorizationStatus()
         
         switch photoStatus {
-            case ALAuthorizationStatus.Authorized:
-                //self.ConsumeUserImages()
-                self.ConsumeAlbumsWithType(PHAssetCollectionType.Album)
-                self.ConsumeAlbumsWithType(PHAssetCollectionType.SmartAlbum)
-            case ALAuthorizationStatus.NotDetermined, ALAuthorizationStatus.Restricted, ALAuthorizationStatus.Denied:
-                
-                // request access
-                PHPhotoLibrary.requestAuthorization({ (status:PHAuthorizationStatus) -> Void in
-                });
-            default:
-                println("nothing")
+        case ALAuthorizationStatus.Authorized:
+            //self.ConsumeUserImages()
+            self.ConsumeAlbumsWithType(PHAssetCollectionType.Album)
+            self.ConsumeAlbumsWithType(PHAssetCollectionType.SmartAlbum)
+        case ALAuthorizationStatus.NotDetermined, ALAuthorizationStatus.Restricted, ALAuthorizationStatus.Denied:
+            
+            // request access
+            PHPhotoLibrary.requestAuthorization({ (status:PHAuthorizationStatus) -> Void in
+            });
+        default:
+            println("nothing")
         }
     }
     
@@ -98,14 +99,15 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
             results.enumerateObjectsUsingBlock({ (object, idx, _) -> Void in
                 if let asset = object as? PHAssetCollection {
                     
-                    println("\(asset.localizedTitle)")
-                    
                     if let photoAssets = PHAsset.fetchAssetsInAssetCollection(asset, options: options) {
                         photoAssets.enumerateObjectsUsingBlock { (object, idx, stop) in
-                            if let asset = object as? PHAsset {
-                                self.ConsumeAssetImage(asset)
-                                var shouldStop:ObjCBool = true
-                                stop.initialize(true)
+                            if let photoAsset = object as? PHAsset {
+                                if (photoAsset.mediaType == PHAssetMediaType.Image) {
+                                    println("image")
+                                    var shouldStop:ObjCBool = true
+                                    stop.initialize(true)
+                                    self.ConsumeAssetImage(photoAsset, albumName: asset.localizedTitle, albumIdentifier:asset.localIdentifier)
+                                }
                             }
                         }
                     }
@@ -114,43 +116,17 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
         }
     }
     
-    func ConsumeUserImages() -> Void
-    {
-        // load up the images on the user's device
-        let cachingManager = PHCachingImageManager()
-        
-        let options = PHFetchOptions()
-        options.sortDescriptors = [
-            NSSortDescriptor(key: "creationDate", ascending: true)
-        ]
-        
-        if let results = PHAsset.fetchAssetsWithMediaType(.Image, options: options) {
-            var assets: [PHAsset] = []
-
-            results.enumerateObjectsUsingBlock { (object, idx, _) in
-                if let asset = object as? PHAsset {
-                    self.ConsumeAssetImage(asset)
-                    assets.append(asset)
-                }
-            }
-            cachingManager.startCachingImagesForAssets(assets, targetSize: PHImageManagerMaximumSize, contentMode: .AspectFit, options: nil)
-        }
-    }
-    
-    func ConsumeAssetImage(imageAsset:PHAsset) -> Void
+    func ConsumeAssetImage(imageAsset:PHAsset, albumName:String, albumIdentifier:String) -> Void
     {
         let requestOptions = PHImageRequestOptions()
         requestOptions.version = PHImageRequestOptionsVersion.Current
         
         PHImageManager.defaultManager().requestImageDataForAsset(imageAsset, options: requestOptions) { (result, metadata, orientation, _) -> Void in
             let imageFromData = UIImage(data: result)
-            if (imageFromData == nil) {
-                return
-            }
             let properlyRotateImage = UIImage(CGImage: imageFromData!.CGImage, scale: 1.0, orientation: orientation)
             let scaledImage = self.scaleImageToFitCollectionCell(properlyRotateImage!)
-            self.albumViewDataSource!.imagesToDisplay!.append(scaledImage)
-            self.albumViewDataSource!.fullSizeImages!.append(properlyRotateImage!)
+            self.albumViewDataSource!.imagesToDisplay!.append(image:scaledImage, albumTitle:albumName, albumIdentifier:albumIdentifier)
+            //self.albumViewDataSource!.fullSizeImages!.append(properlyRotateImage!)
             self.albumView!.reloadData()
         }
     }
@@ -173,11 +149,13 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
         
         return returnImage
     }
-    
-    
+
     // UICOllectionViewDelegate methods
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.delegate!.didSelectImageFromCollection(self.albumViewDataSource!.fullSizeImages![indexPath.item])
+        self.delegate!.didSelectAlbumFromCollection(self.albumViewDataSource!.imagesToDisplay![indexPath.item].albumIdentifier)
     }
+
+
+
 }

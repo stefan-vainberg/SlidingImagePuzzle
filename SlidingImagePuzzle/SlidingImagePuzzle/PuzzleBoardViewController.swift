@@ -35,7 +35,7 @@ class PuzzleBoardViewController : UIViewController, PuzzleGameControllerDelegate
     {
         self.init()
         initialImage = image
-        puzzlePieceSize = 300
+        puzzlePieceSize = 150
         self.puzzlePieces = []
         
     }

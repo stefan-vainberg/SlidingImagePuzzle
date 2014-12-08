@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 
-class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControllerDelegate, UserAlbumCollectionViewControllerDelegate, PuzzleBoardViewControllerDelegate
+class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControllerDelegate, UserAlbumCollectionViewControllerDelegate, PuzzleBoardViewControllerDelegate, MultipleAlbumsCollectionViewControllerDelegate
 {
 
     // PRIVATE VARIABLES
     
     private var selectImageController:SelectPuzzleImageViewController?
-    private var imagesCollectionController:UserAlbumCollectionViewController?
+    private var allAlbumsCollectionViewController:MultipleAlbumsCollectionViewController?
     private var puzzleBoardViewController:PuzzleBoardViewController?
     private var workspace:WorkspaceView?
 
@@ -26,7 +26,7 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
         selectImageController = SelectPuzzleImageViewController()
         selectImageController!.delegate = self
         
-        imagesCollectionController = UserAlbumCollectionViewController()
+        allAlbumsCollectionViewController = MultipleAlbumsCollectionViewController()
         
         workspace = WorkspaceView()
     }
@@ -96,17 +96,22 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
         // remove the selectImageController, and replace it with the select Images Controller
         self.RemoveVC(self.selectImageController!)
 
-        self.AddVC(self.imagesCollectionController!)
-        self.imagesCollectionController!.delegate = self
+        self.AddVC(self.allAlbumsCollectionViewController!)
+        self.allAlbumsCollectionViewController!.delegate = self
     }
     
     // UserAlbumCollectionViewControllerDelegate
     func didSelectImageFromCollection(image: UIImage) {
-        self.RemoveVC(self.imagesCollectionController!)
+        self.RemoveVC(self.allAlbumsCollectionViewController!)
         
         self.puzzleBoardViewController = PuzzleBoardViewController(image: self.scaleImageToFitWorkspace(image))
         self.puzzleBoardViewController!.delegate = self
         self.AddVC(self.puzzleBoardViewController!)
+    }
+    
+    func didSelectAlbumFromCollection(localIdentifier:String) -> Void
+    {
+        println("\(localIdentifier)")
     }
     
     func scaleImageToFitWorkspace(image:UIImage) -> UIImage
