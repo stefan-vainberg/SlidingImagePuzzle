@@ -16,6 +16,7 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
     
     private var selectImageController:SelectPuzzleImageViewController?
     private var allAlbumsCollectionViewController:MultipleAlbumsCollectionViewController?
+    private var singleAlbumPhotosCollectionViewController:UserAlbumCollectionViewController?
     private var puzzleBoardViewController:PuzzleBoardViewController?
     private var workspace:WorkspaceView?
 
@@ -27,7 +28,6 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
         selectImageController!.delegate = self
         
         allAlbumsCollectionViewController = MultipleAlbumsCollectionViewController()
-        
         workspace = WorkspaceView()
     }
     
@@ -112,6 +112,12 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
     func didSelectAlbumFromCollection(localIdentifier:String) -> Void
     {
         println("\(localIdentifier)")
+        self.RemoveVC(self.allAlbumsCollectionViewController!)
+        
+        self.singleAlbumPhotosCollectionViewController = UserAlbumCollectionViewController(albumIdentifier: localIdentifier)
+        self.singleAlbumPhotosCollectionViewController!.delegate = self
+        self.AddVC(self.singleAlbumPhotosCollectionViewController!)
+        
     }
     
     func scaleImageToFitWorkspace(image:UIImage) -> UIImage
@@ -119,7 +125,7 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
         
         let workspaceSize = workspace!.bounds
         
-        // we need to figure out the appropriate amount to scale down
+        // we need to figure out the appropriate amount to scale down!
         let scaleDownWidthFactor = ceil(image.size.width / workspaceSize.width)
         let scaleDownHeightFactor = ceil(image.size.height / workspaceSize.height)
         

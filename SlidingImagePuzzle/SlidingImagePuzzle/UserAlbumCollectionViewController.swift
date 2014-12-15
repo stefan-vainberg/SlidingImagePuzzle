@@ -32,12 +32,19 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
     {
         self.init(nibName: nil, bundle: nil)
     }
+    
+    convenience init(albumIdentifier:String)
+    {
+        self.init()
+        self.albumIdentifier = albumIdentifier
+    }
 
     var delegate:UserAlbumCollectionViewControllerDelegate?
     
     // PRIVATE
     private var albumView:UserAlbumCollectionView?
     private var albumViewDataSource:UserAlbumCollectionViewDataSource?
+    private var albumIdentifier:String?
     
     override func loadView()
     {
@@ -71,8 +78,9 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
         switch photoStatus {
             case ALAuthorizationStatus.Authorized:
                 //self.ConsumeUserImages()
-                self.ConsumeAlbumsWithType(PHAssetCollectionType.Album)
-                self.ConsumeAlbumsWithType(PHAssetCollectionType.SmartAlbum)
+                //self.ConsumeAlbumsWithType(PHAssetCollectionType.Album)
+                //self.ConsumeAlbumsWithType(PHAssetCollectionType.SmartAlbum)
+                self.ConsumeAlbumWithIdentifier(self.albumIdentifier!)
             case ALAuthorizationStatus.NotDetermined, ALAuthorizationStatus.Restricted, ALAuthorizationStatus.Denied:
                 
                 // request access
@@ -85,6 +93,28 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    //CONSUME IMAGES
+    
+    func ConsumeAlbumWithIdentifier(albumIdentifier:String)
+    {
+        let options = PHFetchOptions()
+        
+        if let result = PHAssetCollection.fetchAssetCollectionsWithLocalIdentifiers([albumIdentifier], options: options) {
+            var assets: [PHAsset] = []
+            
+            let photoCollection:PHAssetCollection = result.objectAtIndex(0) as PHAssetCollection
+            
+            if let photos = PHAsset.fetchAssetsInAssetCollection(photoCollection, options: options) {
+                photos.enumerateObjectsUsingBlock({ (object, idx, stop) -> Void in
+                    if let asset = object as? PHAsset {
+                        self.ConsumeAssetImage(asset)
+                    }
+                })
+            }
+            
+        }
     }
     
     func ConsumeAlbumsWithType(type:PHAssetCollectionType) -> Void
