@@ -53,8 +53,13 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
         self.view.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
         //self.view.setTranslatesAutoresizingMaskIntoConstraints(false)
         
-        albumViewDataSource = UserAlbumCollectionViewDataSource()
+        albumViewDataSource = UserAlbumCollectionViewDataSource(albumIdentifier: self.albumIdentifier!)
         albumView = UserAlbumCollectionView(delegate: self, dataSource: albumViewDataSource!)
+        func reloadMethod() -> Void {
+            albumView!.reloadData()
+        }
+        albumViewDataSource!.reloadMethod = reloadMethod
+        
         albumView!.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
         albumView!.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.view.addSubview(albumView!)
@@ -77,9 +82,6 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
         
         switch photoStatus {
             case ALAuthorizationStatus.Authorized:
-                //self.ConsumeUserImages()
-                //self.ConsumeAlbumsWithType(PHAssetCollectionType.Album)
-                //self.ConsumeAlbumsWithType(PHAssetCollectionType.SmartAlbum)
                 self.ConsumeAlbumWithIdentifier(self.albumIdentifier!)
             case ALAuthorizationStatus.NotDetermined, ALAuthorizationStatus.Restricted, ALAuthorizationStatus.Denied:
                 
@@ -99,6 +101,7 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
     
     func ConsumeAlbumWithIdentifier(albumIdentifier:String)
     {
+        
         let options = PHFetchOptions()
         
         if let result = PHAssetCollection.fetchAssetCollectionsWithLocalIdentifiers([albumIdentifier], options: options) {
@@ -109,7 +112,9 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
             if let photos = PHAsset.fetchAssetsInAssetCollection(photoCollection, options: options) {
                 photos.enumerateObjectsUsingBlock({ (object, idx, stop) -> Void in
                     if let asset = object as? PHAsset {
-                        self.ConsumeAssetImage(asset)
+                        //self.ConsumeAssetImage(asset)
+                        self.albumViewDataSource!.imagesToDisplayIdentifiers!.append(asset.localIdentifier)
+                        self.albumView!.reloadData()
                     }
                 })
             }
@@ -127,9 +132,7 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
             
             results.enumerateObjectsUsingBlock({ (object, idx, _) -> Void in
                 if let asset = object as? PHAssetCollection {
-                    
-                    println("\(asset.localizedTitle)")
-                    
+                                        
                     if let photoAssets = PHAsset.fetchAssetsInAssetCollection(asset, options: options) {
                         photoAssets.enumerateObjectsUsingBlock { (object, idx, stop) in
                             if let asset = object as? PHAsset {

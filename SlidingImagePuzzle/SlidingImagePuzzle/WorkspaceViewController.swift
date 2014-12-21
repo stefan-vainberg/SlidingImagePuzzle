@@ -111,7 +111,6 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
     
     func didSelectAlbumFromCollection(localIdentifier:String) -> Void
     {
-        println("\(localIdentifier)")
         self.RemoveVC(self.allAlbumsCollectionViewController!)
         
         self.singleAlbumPhotosCollectionViewController = UserAlbumCollectionViewController(albumIdentifier: localIdentifier)
