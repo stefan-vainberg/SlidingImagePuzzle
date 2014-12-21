@@ -42,6 +42,7 @@ class UserAlbumCollectionView : UIView
         self.cellSize = layout.itemSize
         collectionView = UICollectionView(frame: self.frame, collectionViewLayout: layout)
         collectionView!.registerClass(AlbumCollectionViewCell.self, forCellWithReuseIdentifier: AlbumCollectionViewCell.reuseIdentifier())
+        collectionView!.registerClass(AlbumImageCollectionViewCell.self, forCellWithReuseIdentifier: AlbumImageCollectionViewCell.reuseIdentifier())
         collectionView!.delegate = del
         collectionView!.dataSource = dataSrc
         collectionView!.setTranslatesAutoresizingMaskIntoConstraints(false)

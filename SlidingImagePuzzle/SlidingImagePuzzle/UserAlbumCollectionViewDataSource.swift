@@ -15,7 +15,7 @@ import AssetsLibrary
 
 class UserAlbumCollectionViewDataSource : NSObject, UICollectionViewDataSource
 {
-    let maxNumCachedImages = 10
+    let maxNumCachedImages = 20
     var imagesToDisplay:[UIImage]?
     var imagesToDisplayIdentifiers:[NSString]?
     var fullSizeImages:[UIImage]?
@@ -42,11 +42,14 @@ class UserAlbumCollectionViewDataSource : NSObject, UICollectionViewDataSource
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("userAlbumCell", forIndexPath: indexPath) as UICollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(AlbumImageCollectionViewCell.reuseIdentifier(), forIndexPath: indexPath) as AlbumImageCollectionViewCell
         
         let imageID = self.imagesToDisplayIdentifiers![indexPath.row]
         
         if let image = self.imagesAssociativeDictionary![imageID] {
+            println("updating!")
+            cell.updateCell(image)
+            /*
             if (cell.contentView.subviews.count  > 0) {
                 for subview in cell.contentView.subviews  {
                     subview.removeFromSuperview()
@@ -58,6 +61,7 @@ class UserAlbumCollectionViewDataSource : NSObject, UICollectionViewDataSource
             imageView.layer.borderColor = UIColor.blackColor().CGColor
             imageView.layer.borderWidth = 0.5
             cell.contentView.addSubview(imageView)
+            */
         }
         else {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), { () -> Void in
@@ -81,8 +85,10 @@ class UserAlbumCollectionViewDataSource : NSObject, UICollectionViewDataSource
     
     func FetchImageForIndexPath(indexPath:NSIndexPath, assetID:String) -> Void
     {
+        let startDate = NSDate()
         if let images = PHAsset.fetchAssetsWithLocalIdentifiers([assetID], options: nil) {
             if (images.count > 0) {
+                
                 let imageAsset: PHAsset = images.objectAtIndex(0) as PHAsset
                 self.ConsumeAssetImage(imageAsset)
             }
@@ -96,7 +102,7 @@ class UserAlbumCollectionViewDataSource : NSObject, UICollectionViewDataSource
         
         PHImageManager.defaultManager().requestImageDataForAsset(imageAsset, options: requestOptions) { (result, metadata, orientation, _) -> Void in
             autoreleasepool{
-                if (result.length > 10000000) {
+                if (result == nil || result.length > 10000000) {
                     // strange bug gives me 500 megs of image data sometimes. Could be that an asset is improperly marked as an image when it is in fact a video
                     return
                 }
@@ -110,10 +116,10 @@ class UserAlbumCollectionViewDataSource : NSObject, UICollectionViewDataSource
                         self.imagesLRUArray!.removeLast()
                         self.imagesAssociativeDictionary!.removeValueForKey(assetToPurgeId)
                     }
-                    
                 }
                 let properlyRotateImage = UIImage(CGImage: imageFromData!.CGImage, scale: 1.0, orientation: orientation)
-                let scaledImage = self.scaleImageToFitCollectionCell(properlyRotateImage!)
+                //let scaledImage = self.scaleImageToFitCollectionCell(properlyRotateImage!)
+                let scaledImage = properlyRotateImage
                 self.imagesAssociativeDictionary![imageAsset.localIdentifier] = scaledImage
                 self.imagesLRUArray!.insert(imageAsset.localIdentifier, atIndex: 0)
                 
@@ -139,6 +145,7 @@ class UserAlbumCollectionViewDataSource : NSObject, UICollectionViewDataSource
         
         let returnImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        println("\(returnImage.size)")
         
         return returnImage
     }

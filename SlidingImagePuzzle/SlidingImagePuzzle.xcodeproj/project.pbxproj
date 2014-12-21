@@ -22,6 +22,7 @@
 		0F62453519F60AD80032D5F6 /* SlidingImagePuzzleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F62453419F60AD80032D5F6 /* SlidingImagePuzzleTests.swift */; };
 		0F62453F19F60D180032D5F6 /* WorkspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F62453E19F60D180032D5F6 /* WorkspaceViewController.swift */; };
 		0F62454219F60D740032D5F6 /* WorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F62454119F60D740032D5F6 /* WorkspaceView.swift */; };
+		0F70BC861A468C3500F7247F /* AlbumImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F70BC851A468C3500F7247F /* AlbumImageCollectionViewCell.swift */; };
 		0F88B47919F6106A002DAA38 /* SelectPuzzleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F88B47819F6106A002DAA38 /* SelectPuzzleImageViewController.swift */; };
 		0F88B47B19F61126002DAA38 /* SelectPuzzleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F88B47A19F61126002DAA38 /* SelectPuzzleImageView.swift */; };
 		0FC2B9CA1A3427A80004ABB9 /* MultipleAlbumsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC2B9C91A3427A80004ABB9 /* MultipleAlbumsCollectionViewController.swift */; };
@@ -60,6 +61,7 @@
 		0F62453419F60AD80032D5F6 /* SlidingImagePuzzleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidingImagePuzzleTests.swift; sourceTree = "<group>"; };
 		0F62453E19F60D180032D5F6 /* WorkspaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceViewController.swift; sourceTree = "<group>"; };
 		0F62454119F60D740032D5F6 /* WorkspaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceView.swift; sourceTree = "<group>"; };
+		0F70BC851A468C3500F7247F /* AlbumImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		0F88B47819F6106A002DAA38 /* SelectPuzzleImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPuzzleImageViewController.swift; sourceTree = "<group>"; };
 		0F88B47A19F61126002DAA38 /* SelectPuzzleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPuzzleImageView.swift; sourceTree = "<group>"; };
 		0FC2B9C91A3427A80004ABB9 /* MultipleAlbumsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleAlbumsCollectionViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				0F454DBB19FC5AF600D234D2 /* UserAlbumCollectionViewController.swift */,
 				0F454DBD19FDD19400D234D2 /* UserAlbumCollectionView.swift */,
 				0F454DC119FDDCBE00D234D2 /* UserAlbumCollectionViewDataSource.swift */,
+				0F70BC851A468C3500F7247F /* AlbumImageCollectionViewCell.swift */,
 			);
 			name = "Handling User Images";
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				0F240C691A0EF7FC0096073C /* PuzzleBoardViewController.swift in Sources */,
 				0FC2B9CE1A3427CF0004ABB9 /* MultipleAlbumsCollectionViewDataSource.swift in Sources */,
 				0F240C6D1A0F072A0096073C /* PuzzleGameController.swift in Sources */,
+				0F70BC861A468C3500F7247F /* AlbumImageCollectionViewCell.swift in Sources */,
 				0F454DC219FDDCBE00D234D2 /* UserAlbumCollectionViewDataSource.swift in Sources */,
 				0FC2B9D01A3513AA0004ABB9 /* AlbumCollectionViewCell.swift in Sources */,
 				0FC2B9CA1A3427A80004ABB9 /* MultipleAlbumsCollectionViewController.swift in Sources */,

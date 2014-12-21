@@ -14,7 +14,7 @@ class AlbumCollectionViewCell: UICollectionViewCell
 {
     
     // PRIVATE
-    private var cellImageView:UIImageView?
+    var cellImageView:UIImageView?
     private var cellTitle: String?
     
     class func reuseIdentifier() -> String
@@ -41,6 +41,7 @@ class AlbumCollectionViewCell: UICollectionViewCell
         cellImageView!.clipsToBounds = true
         cellImageView!.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
         cellImageView!.frame = self.bounds
+        cellImageView!.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2)
         self.contentView.addSubview(cellImageView!)
     }
     
