@@ -102,7 +102,7 @@ class WorkspaceViewController : UIViewController, SelectPuzzleImageViewControlle
     
     // UserAlbumCollectionViewControllerDelegate
     func didSelectImageFromCollection(image: UIImage) {
-        self.RemoveVC(self.allAlbumsCollectionViewController!)
+        self.RemoveVC(self.singleAlbumPhotosCollectionViewController!)
         
         self.puzzleBoardViewController = PuzzleBoardViewController(image: self.scaleImageToFitWorkspace(image))
         self.puzzleBoardViewController!.delegate = self

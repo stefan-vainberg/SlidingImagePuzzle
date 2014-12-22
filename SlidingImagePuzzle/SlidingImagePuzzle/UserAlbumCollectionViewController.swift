@@ -55,8 +55,8 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
         
         albumViewDataSource = UserAlbumCollectionViewDataSource(albumIdentifier: self.albumIdentifier!)
         albumView = UserAlbumCollectionView(delegate: self, dataSource: albumViewDataSource!)
-        func reloadMethod() -> Void {
-            albumView!.reloadData()
+        func reloadMethod(indexPath:NSIndexPath) -> Void {
+            albumView!.reloadData(indexPath)
         }
         albumViewDataSource!.reloadMethod = reloadMethod
         
@@ -211,6 +211,8 @@ class UserAlbumCollectionViewController : UIViewController, UICollectionViewDele
     // UICOllectionViewDelegate methods
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.delegate!.didSelectImageFromCollection(self.albumViewDataSource!.fullSizeImages![indexPath.item])
+        let selectedImage = self.albumViewDataSource!.imagesAssociativeDictionary![self.albumViewDataSource!.imagesToDisplayIdentifiers![indexPath.item]]
+        println("\(selectedImage!.size)")
+        self.delegate!.didSelectImageFromCollection(selectedImage!)
     }
 }

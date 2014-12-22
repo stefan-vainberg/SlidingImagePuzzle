@@ -35,7 +35,15 @@ class PuzzleBoardViewController : UIViewController, PuzzleGameControllerDelegate
     {
         self.init()
         initialImage = image
-        puzzlePieceSize = 150
+        
+        let device = UIDevice.currentDevice().userInterfaceIdiom
+        
+        if (device == .Phone) {
+            puzzlePieceSize = 50
+        }
+        else {
+            puzzlePieceSize = 150
+        }
         self.puzzlePieces = []
         
     }

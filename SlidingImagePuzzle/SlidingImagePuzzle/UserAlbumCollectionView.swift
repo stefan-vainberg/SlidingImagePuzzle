@@ -60,4 +60,9 @@ class UserAlbumCollectionView : UIView
     {
         collectionView!.reloadData()
     }
+    
+    func reloadData(indexPath:NSIndexPath) -> Void
+    {
+        collectionView!.reloadItemsAtIndexPaths([indexPath])
+    }
 }

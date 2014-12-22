@@ -15,11 +15,11 @@ import AssetsLibrary
 
 class UserAlbumCollectionViewDataSource : NSObject, UICollectionViewDataSource
 {
-    let maxNumCachedImages = 20
+    let maxNumCachedImages = 30
     var imagesToDisplay:[UIImage]?
     var imagesToDisplayIdentifiers:[NSString]?
     var fullSizeImages:[UIImage]?
-    var reloadMethod:(() -> Void)?
+    var reloadMethod:((NSIndexPath) -> Void)?
     
     var imagesAssociativeDictionary:[NSString:UIImage]?
     var imagesLRUArray:[String]?
@@ -47,7 +47,6 @@ class UserAlbumCollectionViewDataSource : NSObject, UICollectionViewDataSource
         let imageID = self.imagesToDisplayIdentifiers![indexPath.row]
         
         if let image = self.imagesAssociativeDictionary![imageID] {
-            println("updating!")
             cell.updateCell(image)
             /*
             if (cell.contentView.subviews.count  > 0) {
@@ -64,6 +63,7 @@ class UserAlbumCollectionViewDataSource : NSObject, UICollectionViewDataSource
             */
         }
         else {
+            cell.clearCell()
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), { () -> Void in
                 objc_sync_enter(self)
                 self.FetchImageForIndexPath(indexPath, assetID: imageID)
@@ -90,12 +90,12 @@ class UserAlbumCollectionViewDataSource : NSObject, UICollectionViewDataSource
             if (images.count > 0) {
                 
                 let imageAsset: PHAsset = images.objectAtIndex(0) as PHAsset
-                self.ConsumeAssetImage(imageAsset)
+                self.ConsumeAssetImage(imageAsset, indexPath: indexPath)
             }
         }
     }
     
-    func ConsumeAssetImage(imageAsset:PHAsset) -> Void
+    func ConsumeAssetImage(imageAsset:PHAsset, indexPath:NSIndexPath) -> Void
     {
         let requestOptions = PHImageRequestOptions()
         requestOptions.version = PHImageRequestOptionsVersion.Current
@@ -118,16 +118,27 @@ class UserAlbumCollectionViewDataSource : NSObject, UICollectionViewDataSource
                     }
                 }
                 let properlyRotateImage = UIImage(CGImage: imageFromData!.CGImage, scale: 1.0, orientation: orientation)
-                //let scaledImage = self.scaleImageToFitCollectionCell(properlyRotateImage!)
                 let scaledImage = properlyRotateImage
                 self.imagesAssociativeDictionary![imageAsset.localIdentifier] = scaledImage
                 self.imagesLRUArray!.insert(imageAsset.localIdentifier, atIndex: 0)
                 
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.reloadMethod!()
+                    self.reloadMethod!(indexPath)
                 })
             }
         }
+    }
+    
+    func clipImageToFitCollectionCell(image: UIImage) -> UIImage
+    {
+        let heightWidthDiff = abs(image.size.width - image.size.height)
+        
+        let clipRect = CGRectMake(0, 0, image.size.width > image.size.height ? image.size.width - heightWidthDiff : image.size.width, image.size.height > image.size.width ? image.size.height - heightWidthDiff : image.size.height)
+        
+        var croppedImage = CGImageCreateWithImageInRect(image.CGImage, clipRect)
+        let returnImage = UIImage(CGImage: croppedImage)!
+        croppedImage = nil
+        return returnImage
     }
     
     func scaleImageToFitCollectionCell(image: UIImage) -> UIImage
